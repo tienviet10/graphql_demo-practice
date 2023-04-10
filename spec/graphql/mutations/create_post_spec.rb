@@ -5,7 +5,7 @@ describe Mutations::CreatePost do
 
   def createAPost(title:, body:)
     described_class.new(object: nil, field: nil, context: {}).resolve(
-      title: title, body: body,
+      title: title, body: body, user_id: user.id,
     )
   end
 
