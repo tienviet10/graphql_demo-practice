@@ -117,6 +117,7 @@ GEM
     nio4r (2.5.9)
     nokogiri (1.14.2-arm64-darwin)
       racc (~> 1.4)
+    pg (1.4.6)
     puma (5.6.5)
       nio4r (~> 2.0)
     racc (1.6.2)
@@ -202,6 +203,7 @@ DEPENDENCIES
   graphiql-rails
   graphql
   listen (~> 3.3)
+  pg
   puma (~> 5.0)
   rack-cors
   rails (~> 6.1.7, >= 6.1.7.2)
