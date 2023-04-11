@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_08_131207) do
+ActiveRecord::Schema.define(version: 2023_04_11_042107) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "mytable", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 50, null: false
+    t.integer "age"
+  end
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -26,6 +34,7 @@ ActiveRecord::Schema.define(version: 2023_04_08_131207) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "password_digest"
   end
 
   add_foreign_key "posts", "users"
