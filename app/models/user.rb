@@ -7,4 +7,6 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 8 }
 
   has_many :posts
+  has_many :attendances
+  has_many :attended_events, through: :attendances, source: :event
 end

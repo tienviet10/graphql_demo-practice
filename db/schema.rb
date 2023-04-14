@@ -10,10 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_11_042107) do
+ActiveRecord::Schema.define(version: 2023_04_14_142924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attendances", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
+    t.boolean "attended", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_attendances_on_event_id"
+    t.index ["user_id"], name: "index_attendances_on_user_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "categories_products", id: false, force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "category_id", null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.text "imageURL"
+    t.datetime "releaseDate"
+    t.decimal "avg_score", precision: 3, scale: 1
+    t.integer "total_ratings"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "mytable", id: :serial, force: :cascade do |t|
     t.string "name", limit: 50, null: false
@@ -29,6 +67,12 @@ ActiveRecord::Schema.define(version: 2023_04_11_042107) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "name"
@@ -37,5 +81,7 @@ ActiveRecord::Schema.define(version: 2023_04_11_042107) do
     t.string "password_digest"
   end
 
+  add_foreign_key "attendances", "events"
+  add_foreign_key "attendances", "users"
   add_foreign_key "posts", "users"
 end
