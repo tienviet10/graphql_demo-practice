@@ -1,8 +1,8 @@
 module Types
   class MutationType < Types::BaseObject
-    field :create_user, mutation: Mutations::CreateUser
-    field :create_post, mutation: Mutations::CreatePost
-    field :login, mutation: Mutations::Login
-    field :register, mutation: Mutations::Registration
+    field :create_user, mutation: Mutations::Users::CreateUser
+    field :create_post, mutation: Mutations::Posts::CreatePost
+    field :login, mutation: Mutations::Users::Login
+    field :register, mutation: Mutations::Users::Registration
   end
 end
